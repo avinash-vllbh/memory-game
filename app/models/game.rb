@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  GRID_SIZE = 4
+  GRID_SIZE = 6
   # Serializing board and flipped attributes of game
   serialize :board
   serialize :flipped
