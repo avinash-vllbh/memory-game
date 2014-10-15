@@ -15,3 +15,37 @@
 //= require bootstrap.min
 //= require turbolinks
 //= require_tree .
+
+$( document ).ready(function() {
+  $(".cards").click(function() {
+    // check if it's not already selected
+    if(!$(this).hasClass("selected")) {
+      // Check if any other card has already been flipped
+      if($(".cards.selected").length) {
+        var prevCardId = $(".cards.selected").attr("id");
+      }
+      // Get current element's attribute-id and show it's content
+      // Add selected class to it
+      var currentCardId = $(this).attr("id");
+      $(this).html(board[currentCardId].card).show(300).addClass("selected");
+      if(prevCardId) {
+        // Check if cards match
+        if(board[currentCardId].card == board[prevCardId].card) {
+          // Remove selected class from the elements and add flipped class
+          $(".cards#"+currentCardId).removeClass("selected").addClass("flipped");
+          $(".cards#"+prevCardId).removeClass("selected").addClass("flipped");
+        } else {
+          setTimeout(function() {
+            $(".cards#"+currentCardId).html("").removeClass("selected");
+            $(".cards#"+prevCardId).html("").removeClass("selected");
+          }, 1000);
+          
+        }
+      }
+    } 
+  });
+});
+
+function updateProgress(id1, id2) {
+// Make an ajax call to games#update
+}
