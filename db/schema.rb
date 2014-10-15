@@ -11,23 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015020426) do
+ActiveRecord::Schema.define(version: 20141015051352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "cards", force: true do |t|
-    t.string   "content"
+    t.string   "content",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "cards", ["content"], name: "index_cards_on_content", unique: true, using: :btree
+
   create_table "games", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
-    t.text     "board"
-    t.integer  "total_pairs"
+    t.text     "board",                   null: false
+    t.integer  "total_pairs",             null: false
     t.text     "flipped"
-    t.integer  "pairs_found"
+    t.integer  "pairs_found", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
