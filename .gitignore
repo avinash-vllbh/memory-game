@@ -14,4 +14,4 @@ Gemfile.lock
 /tmp
 
 #Ignoring config files
-config/database.yml
+config/database.yml.env
