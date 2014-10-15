@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   root 'games#index'
 
-  resources :games
+  resources :games, :only => [:index, :show, :update]
   resources :cards
 
   # The priority is based upon order of creation: first created -> highest priority.

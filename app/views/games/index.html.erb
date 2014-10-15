@@ -1,12 +1,27 @@
-<div class = "container">
-  <div class = "board">
-  </div>
-  <div class = "info">
-  <p>please use below if you are in the mood to continue your progress at a later time</p>
-  <span class = "url">
-    <a href = "http://<%= @hostname %>:<%= @port %>/<%= @game.id %>">http://<%= @hostname %>:<%= @port %>/<%= @game.id %></a>
-  </span>
-  <button title="email me above url">Email-me</button>
-  <button title="bookmark the above url">Bookmark-it</button>
-  </div>
+<div class = "board">
+  <% @game.board.each do |card| %>
+    <div class = "cards" id = "<%= card['id'] %>">
+    </div>
+  <% end %>
 </div>
+<div class = "info">
+  <p>please use below if you are in the mood to continue your progress at a later time</p>
+<span class = "url">
+  <a href = "http://<%= @hostname %>:<%= @port %>/<%= @game.id %>">http://<%= @hostname %>:<%= @port %>/<%= @game.id %></a>
+</span>
+<button title="email me above url">Email-me</button>
+</div>
+<script type="text/javascript">
+  var game_id = "<%= @game.id %>"; 
+  // Pass @game.board to javascript to display content when clicking on any div
+  var board = '<%= @game.board.to_json.html_safe %>';
+  // progress as array to store current flipped items
+  var progress = [];
+  // check if current progress is nil and elements if any are already filpped
+  <% unless @game.flipped.nil? %>
+    <% @games.flipped.each do |id| %>
+      progress.push("<%= id %>");
+    <% end %>
+  <% end %>  
+  board = JSON.parse(board);
+</script>
