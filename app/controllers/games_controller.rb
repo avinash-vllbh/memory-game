@@ -30,6 +30,13 @@ class GamesController < ApplicationController
   end
 
   def update
-    
+    @game = Game.find(params[:id])
+    @game.flipped = params[:progress]
+    @game.pairs_found = params[:progress].size/2
+    if @game.save! # Bang to make sure it fails if an exception is found
+      render json: nil, status: 200
+    else
+      render :json => {:errors => @contact.errors.messages}, :status => 422
+    end
   end
 end

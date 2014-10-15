@@ -34,6 +34,7 @@ $( document ).ready(function() {
           // Remove selected class from the elements and add flipped class
           $(".cards#"+currentCardId).removeClass("selected").addClass("flipped");
           $(".cards#"+prevCardId).removeClass("selected").addClass("flipped");
+          updateProgress(currentCardId, prevCardId);
         } else {
           setTimeout(function() {
             $(".cards#"+currentCardId).html("").removeClass("selected");
@@ -47,5 +48,20 @@ $( document ).ready(function() {
 });
 
 function updateProgress(id1, id2) {
-// Make an ajax call to games#update
+  progress.push(id1);
+  progress.push(id2);
+  // Make an ajax call to games#update
+  $.ajax({
+    type: "PUT",
+    url: "/games/"+game_id,
+    dataType: "json",
+    data: {progress: progress},
+    success: function(){
+      console.log("progress saved to backend");
+    }
+  });
 }
+
+
+
+
