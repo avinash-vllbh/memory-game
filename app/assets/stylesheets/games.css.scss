@@ -1,3 +1,12 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.cards {
+  min-height: 60px;
+  // height: 50px;
+  // width: 50px;
+  border: 1px solid #333;
+  margin-bottom: 10px;
+  display: inline-block;
+}
