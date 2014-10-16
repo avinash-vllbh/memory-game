@@ -1,0 +1,17 @@
+sample:
+  id: "0b270043-257e-43d7-a0b5-b12c185c0577"
+  board: [{ "id": "0", "card": "square"},{ "id": "1", "card": "circle"},{ "id": "2", "card": "circle"},{ "id": "3", "card": "square"}]
+  total_pairs: 2
+  flipped: ""
+  pairs_found: 0
+  created_at: "2014-10-16 14:40:34.181448"
+  updated_at: "2014-10-16 14:40:34.181448"
+
+played:
+  id: "0b350043-257e-43d7-a0b5-abcde85c0577"
+  board: [{ "id": "0", "card": "square"},{ "id": "1", "card": "circle"},{ "id": "2", "card": "circle"},{ "id": "3", "card": "square"}]
+  total_pairs: 2
+  flipped: ["0","4"]
+  pairs_found: 1
+  created_at: "2014-10-16 14:40:34.181448"
+  updated_at: "2014-10-16 14:40:34.181448"
