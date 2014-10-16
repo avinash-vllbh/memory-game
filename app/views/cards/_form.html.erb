@@ -1,0 +1,11 @@
+<span class = "alert-danger">
+  <%= @card.errors.full_messages.first if @card.errors.any? %>
+</span>
+<%= form_for @card, :html => {:class => "form"} do |f| %>
+  <div class="form-group">
+    <label>Content</label>
+    <%= f.text_field :content, {:class => 'form-control'} %>
+  </div>
+  <%= f.submit "Submit", :class => 'btn btn-sm btn-danger' %>
+  <%= link_to 'Back', cards_path, :class => 'btn btn-sm btn-default' %>
+<% end %>

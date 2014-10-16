@@ -1,2 +1,24 @@
-<h1>Cards#index</h1>
-<p>Find me in app/views/cards/index.html.erb</p>
+<h1>List of Cards</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Content</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @cards.each do |card| %>
+    <tr>
+      <td><%= card.id %></td>
+      <td><%= card.content %></td>
+      <td>
+        <%= link_to "Edit Card", edit_card_path(card), :class => "btn btn-sm btn-primary" %>
+        <%= link_to "Delete", card, method: :delete, :class => "btn btn-sm btn-danger", :confirm => "Are you sure?" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= link_to "Add New Card", new_card_path, :class => "btn btn-sm btn-success" %>
+
