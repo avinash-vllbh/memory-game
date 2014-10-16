@@ -10,7 +10,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
-    if @card.save
+    if @card.create
       flash[:info] = "New card is successfully created"
       redirect_to cards_path
     else

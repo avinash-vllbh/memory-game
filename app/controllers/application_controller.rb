@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
     if current_user.try(:admin?)
       return true
     else
-      redirect_to new_user_session_path unless current_user && current_user.admin?
+      # unless current_user && current_user.admin?
+      redirect_to new_user_session_path 
     end
   end
 
