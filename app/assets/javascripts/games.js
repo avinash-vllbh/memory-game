@@ -1,4 +1,9 @@
-$( document ).ready(function() {
+/*
+* Register submit event on #notify-form form
+* Stop default action - to submit a post to backend
+* Gets the form data, serializes it add the url that needs to sent as email
+*/
+$( document ).on('ready page:load', function() {
   /* attach a submit handler to the form */
   $("#notify-form").submit(function(event) {
     event.preventDefault(); //STOP default action

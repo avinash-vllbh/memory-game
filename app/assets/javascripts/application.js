@@ -16,8 +16,15 @@
 //= require turbolinks
 //= require_tree .
 
-$( document ).ready(function() {
-  // To flip the cards - when user comes back to his progress
+/*
+* Registering events and functions that needs to be run
+* These needs to be done on both document ready and page:load event
+* Rails turbolinks - Makes any links on the page fire just page:load rather than ready.
+*/
+$( document ).on('ready page:load', function() {
+  /* 
+  * To flip the cards - when user comes back to his progress
+  */
   $(function(){
     if (typeof progress !== 'undefined' && progress.length > 0) {
       progress.forEach(function(id) {
@@ -26,6 +33,10 @@ $( document ).ready(function() {
     }
   });
 
+  /* 
+  * Register click event on div's with cards class
+  * check if they are already selected or not and perform sequence of operatons.
+  */
   $(".cards").click(function() {
     // check if it's not already selected 
     // to make sure only two cards can have class selected to them
@@ -57,6 +68,11 @@ $( document ).ready(function() {
   });
 });
 
+/*
+* Updates game progress to the backend seamlessly
+* @param {Number} id1
+* @param {Number} id2
+*/
 function updateProgress(id1, id2) {
   progress.push(id1);
   progress.push(id2);
