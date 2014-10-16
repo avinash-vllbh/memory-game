@@ -1,0 +1,55 @@
+<div class = "row">
+  <div class = "col-md-6 col-md-offset-1">
+    <div class = "board">
+    <% @game.board.each do |card| %>
+      <div class = "cards" id = "<%= card['id'] %>">
+      </div>
+    <% end %>
+    </div>
+  </div>
+  <div class = "col-md-3 col-md-offset-1">
+  <h4><span class="glyphicon glyphicon-bookmark"></span> Tips to play the game</h4>
+  <p>
+    <span class="glyphicon glyphicon-hand-right"></span> Clicking on a card will reveal it's contents</br>
+    <span class="glyphicon glyphicon-hand-right"></span> When you have clicked on two cards,</br>
+    <span class="glyphicon glyphicon-hand-right"></span> If they both are the same - they stay flipped</br>
+    <span class="glyphicon glyphicon-hand-right"></span> If they both are different, they stay flipped for a short amount of time for you to memorize and they will be flipped back to blanks</br>
+    <span class="glyphicon glyphicon-hand-right"></span> Thus improving your memory in trying to remember where the cards might have been positioned.</br>
+  </p>
+  </div>
+</div>
+<div class = "info row">
+  <div class = "col-md-5 col-md-offset-1">
+    <p>
+      please use below link, if you want to continue your progress at a later time</br>
+      <span class = "url">
+        <a href = "http://<%= @hostname %>:<%= @port %>/games/<%= @game.id %>" id = "progressLink">http://<%= @hostname %>:<%= @port %>/games/<%= @game.id %></a>
+      </span>
+    </p>
+  </div>
+  <div class = "email-section col-md-6">
+    <p> Enter email id below to email the link your email address </p>
+    <%= form_tag '/notify_user', :class => "form", :id => "notify-form" do %>
+      <div class="form-group" style = "width: 50%">
+        <%= email_field_tag 'email', nil, placeholder: 'Enter email address...', :class => 'form-control', required: true %>
+      </div>
+      <%= submit_tag "Email Me", :class => 'btn btn-sm btn-danger' %>
+    <% end %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  var game_id = "<%= @game.id %>"; 
+  // Pass @game.board to javascript to display content when clicking on any div
+  var board = '<%= @game.board.to_json.html_safe %>';
+  // progress as array to store current flipped items
+  var progress = [];
+  // check if current progress is nil and elements if any are already filpped
+  <% unless @game.flipped.nil? %>
+    <% @game.flipped.each do |id| %>
+      progress.push("<%= id %>");
+    <% end %>
+  <% end %>  
+  board = JSON.parse(board);
+</script>

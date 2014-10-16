@@ -7,11 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-<h1>Memory Game</h1>
-</hr>
-</header>
-<%= yield %>
+<div class = "main-wrapper">
+  <header class="navbar" id="site-header" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to root_path do %>
+          <span class = "site-logo"><strong>Memory Game</strong></span>
+        <% end %>
+      </div>
+    </div>
+  </header>
+  <div class = "container">
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    <%= yield %>
+  </div>
+  <div class="push"></div>
+</div>
+<div class="footer">
+  <div class="container">
 
+  </div>
+</div>
 </body>
 </html>

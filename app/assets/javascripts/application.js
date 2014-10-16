@@ -17,6 +17,15 @@
 //= require_tree .
 
 $( document ).ready(function() {
+  // To flip the cards - when user comes back to his progress
+  $(function(){
+    if (typeof progress !== 'undefined' && progress.length > 0) {
+      progress.forEach(function(id) {
+        $(".cards#"+id).html(board[id].card).addClass("flipped");
+      });
+    }
+  });
+
   $(".cards").click(function() {
     // check if it's not already selected
     if(!$(this).hasClass("selected")) {

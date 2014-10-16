@@ -27,6 +27,9 @@ class GamesController < ApplicationController
   end
 
   def show
+    @game = Game.find(params[:id])
+    @hostname = request.host
+    @port = request.port
   end
 
   def update
@@ -38,5 +41,10 @@ class GamesController < ApplicationController
     else
       render :json => {:errors => @contact.errors.messages}, :status => 422
     end
+  end
+
+  def notify_user
+    UserMailer.notify_email(params[:email], params[:url]).deliver
+    render json: nil, status: 200
   end
 end

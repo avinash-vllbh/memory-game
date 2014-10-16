@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   
+  devise_for :users
   root 'games#index'
 
   resources :games, :only => [:index, :show, :update]
+  post 'notify_user', to: 'games#notify_user'
   resources :cards
 
   # The priority is based upon order of creation: first created -> highest priority.
