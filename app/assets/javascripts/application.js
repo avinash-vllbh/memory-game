@@ -27,8 +27,9 @@ $( document ).ready(function() {
   });
 
   $(".cards").click(function() {
-    // check if it's not already selected
-    if(!$(this).hasClass("selected")) {
+    // check if it's not already selected 
+    // to make sure only two cards can have class selected to them
+    if(!$(this).hasClass("selected") && $(".cards.selected").length < 2) {
       // Check if any other card has already been flipped
       if($(".cards.selected").length) {
         var prevCardId = $(".cards.selected").attr("id");

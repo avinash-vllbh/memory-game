@@ -3,19 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .board {
-  width: 400px;
+  width: 500px;
 }
 .cards {
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   border: 1px solid #333;
-  margin-bottom: 10px;
+  margin: 0 10px 10px 0;
   display: inline-block;
   text-align: center;
-  vertical-align: center;
+  vertical-align: middle;
+  // To wrap text inside div
+  white-space: pre-wrap;      /* CSS3 */   
+  white-space: -moz-pre-wrap; /* Firefox */    
+  white-space: -pre-wrap;     /* Opera <7 */   
+  white-space: -o-pre-wrap;   /* Opera 7 */    
+  word-wrap: break-word;      /* IE */
 }
 .info {
-  margin: 30px 0 30px 0;
+  margin: 40px 0 30px 0;
 }
 .email-section {
   border-left: 1px solid #ccc;

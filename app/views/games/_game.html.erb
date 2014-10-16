@@ -1,13 +1,13 @@
 <div class = "row">
-  <div class = "col-md-6 col-md-offset-1">
+  <div class = "col-md-7 col-md-offset-1">
     <div class = "board">
     <% @game.board.each do |card| %>
-      <div class = "cards" id = "<%= card['id'] %>">
+      <div class = "cards col-md-1" id = "<%= card['id'] %>">
       </div>
     <% end %>
     </div>
   </div>
-  <div class = "col-md-3 col-md-offset-1">
+  <div class = "col-md-3">
   <h4><span class="glyphicon glyphicon-bookmark"></span> Tips to play the game</h4>
   <p>
     <span class="glyphicon glyphicon-hand-right"></span> Clicking on a card will reveal it's contents</br>
