@@ -45,6 +45,11 @@ group :development, :test do
   gem 'guard-rspec'
 end
 
+group :test do
+  gem 'simplecov'
+  gem 'capybara'
+end
+
 gem 'rails_12factor', group: :production
 
 # Use unicorn as the app server
