@@ -22,9 +22,7 @@
   <div class = "col-md-5 col-md-offset-1">
     <p>
       please use below link, if you want to continue your progress at a later time</br>
-      <span class = "url">
-        <a href = "http://<%= @hostname %>:<%= @port %>/games/<%= @game.id %>" id = "progressLink">http://<%= @hostname %>:<%= @port %>/games/<%= @game.id %></a>
-      </span>
+      <%= link_to "Continue Progress", :controller => "games", :action => "show", :id => @game.id, :host => @hostname %>
     </p>
   </div>
   <div class = "email-section col-md-6">

@@ -23,13 +23,11 @@ class GamesController < ApplicationController
     @game.board = board
     @game.save!
     @hostname = request.host
-    @port = request.port
   end
 
   def show
     @game = Game.find(params[:id])
     @hostname = request.host
-    @port = request.port
   end
 
   def update
