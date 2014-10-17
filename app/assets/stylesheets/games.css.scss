@@ -2,6 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
 .board {
   width: 500px;
 }
@@ -14,6 +23,7 @@
   display: inline-block;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
   // To wrap text inside div
   white-space: pre-wrap;      /* CSS3 */   
   white-space: -moz-pre-wrap; /* Firefox */    
@@ -22,13 +32,7 @@
   word-wrap: break-word;      /* IE */
   .pos-center {
     display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -ms-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
+    @include center;
   }
 }
 .flipped {
@@ -41,4 +45,13 @@
 .email-section {
   border-left: 1px solid #ccc;
   padding-left: 40px;
+}
+.modal-body {
+  // padding-top: 20%;
+  min-height: 300px;
+  margin: auto;
+  text-align: center;
+  .modal-body-center {
+    @include center;
+  }
 }

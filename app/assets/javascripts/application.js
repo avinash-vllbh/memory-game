@@ -31,6 +31,7 @@ $( document ).on('ready page:load', function() {
         $(".cards#"+id).html("<span class = 'pos-center'>" + board[id].card + "</span>").addClass("flipped");
         $(".cards#"+id).find(".pos-center").fadeIn(500);
       });
+      checkIfGameCompleted();
     }
   });
 
@@ -40,8 +41,9 @@ $( document ).on('ready page:load', function() {
   */
   $(".cards").click(function() {
     // check if it's not already selected 
+    // check if it's not already flipped
     // to make sure only two cards can have class selected to them
-    if(!$(this).hasClass("selected") && $(".cards.selected").length < 2) {
+    if(!$(this).hasClass("selected") && $(".cards.selected").length < 2 && !$(this).hasClass("flipped")) {
       // Check if any other card has already been flipped
       if($(".cards.selected").length) {
         var prevCardId = $(".cards.selected").attr("id");
@@ -84,10 +86,19 @@ function updateProgress(id1, id2) {
     dataType: "json",
     data: {progress: progress},
     success: function(){
+      checkIfGameCompleted();
     }
   });
 }
 
+/*
+* Checks if game is completed and offer to start a new game
+*/
+function checkIfGameCompleted() {
+  if (board.length == progress.length) {
+    $('#game-completed').modal('show')    
+  }
+}
 
 
 
