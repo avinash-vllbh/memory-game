@@ -11,6 +11,8 @@ http://memorygame-demo.herokuapp.com
 ### Features
 
 * Randomized board for every game, which keeps the game interesting.
+* Designed to allow the game-board size to be easily changed in future to 4*4 or 6*6 or 8*8 etc, also could be made dynamic.
+* Currently game-board size is set to 6*6 grid.
 * Saves the state of users game, allowing them to come back to play over time.
 * Uses UUID to track each game's progress.
 * Using UUID allow's user's game progress to be isolated to themselves, also makes it harder to guess other's game identifier.
