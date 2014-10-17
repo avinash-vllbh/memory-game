@@ -61,8 +61,7 @@ $( document ).on('ready page:load', function() {
           setTimeout(function() {
             $(".cards#"+currentCardId).html("").removeClass("selected");
             $(".cards#"+prevCardId).html("").removeClass("selected");
-          }, 1200);
-          
+          }, 1000);
         }
       }
     } 
@@ -84,7 +83,6 @@ function updateProgress(id1, id2) {
     dataType: "json",
     data: {progress: progress},
     success: function(){
-      console.log("progress saved to backend");
     }
   });
 }

@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class = "col-md-3">
-  <h4><span class="glyphicon glyphicon-bookmark"></span> Tips to play the game</h4>
+  <h4><span class="glyphicon glyphicon-bookmark"></span> Tips to play the game</h4><hr>
   <p>
     <span class="glyphicon glyphicon-hand-right"></span> Clicking on a card will reveal it's contents</br>
     <span class="glyphicon glyphicon-hand-right"></span> When you have clicked on two cards,</br>
@@ -22,7 +22,7 @@
   <div class = "col-md-5 col-md-offset-1">
     <p>
       please use below link, if you want to continue your progress at a later time</br>
-      <%= link_to "Continue Progress", :controller => "games", :action => "show", :id => @game.id, :host => @hostname %>
+      <%= link_to "Continue Progress", { :controller => "games", :action => "show", :id => @game.id, :host => @hostname }, :class => "progressLink" %>
     </p>
   </div>
   <div class = "email-section col-md-6">
