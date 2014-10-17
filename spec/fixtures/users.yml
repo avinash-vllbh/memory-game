@@ -1,7 +1,7 @@
 admin:
   id: 1
-  email: "avinash.vllbh@gmail.com"
-  encrypted_password: "$2a$10$axW3jvN.EV0h6iG.mYw0v.FC5G3qcXIeKge9YYu7a3iFY1QI3SeiW"
+  email: "admin@memorygame.com"
+  encrypted_password: "$2a$10$QknK/7zu3J2EryH08mGrRezrPgJNuON1EvNulpyF3k/gYWb/VRiYq"
   sign_in_count: 1
   current_sign_in_at: "2014-10-16 20:21:29.620841"
   last_sign_in_at: "2014-10-16 20:21:29.620841"
@@ -9,4 +9,4 @@ admin:
   last_sign_in_ip: "127.0.0.1"
   created_at: "2014-10-16 20:21:29.606997"
   updated_at: "2014-10-16 20:21:29.627238"
-  admin: FALSE
+  admin: TRUE

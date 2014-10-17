@@ -14,7 +14,7 @@ describe Card, :type => :model do
     end
 
     it "content cannot be less that 4 characters" do
-      expect(cards(:short)).not_to be_valid
+      expect(Card.new(:content => "ttt")).not_to be_valid
     end
   end
 end

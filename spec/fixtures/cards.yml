@@ -1,11 +1,17 @@
 square:
+  id: 1
   content: square
+  created_at: "2014-10-16 14:40:34.181448"
+  updated_at: "2014-10-16 14:40:34.181448"
 
 circle:
+  id: 2
   content: circle
+  created_at: "2014-10-16 14:40:34.181448"
+  updated_at: "2014-10-16 14:40:34.181448"
 
 pentagon:
+  id: 3
   content: pentagon
-
-short:
-  content: ttt
+  created_at: "2014-10-16 14:40:34.181448"
+  updated_at: "2014-10-16 14:40:34.181448"
