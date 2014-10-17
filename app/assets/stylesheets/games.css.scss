@@ -10,6 +10,7 @@
   width: 70px;
   border: 1px solid #333;
   margin: 0 10px 10px 0;
+  position: relative;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -19,6 +20,20 @@
   white-space: -pre-wrap;     /* Opera <7 */   
   white-space: -o-pre-wrap;   /* Opera 7 */    
   word-wrap: break-word;      /* IE */
+  .pos-center {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+.flipped {
+  background-color: #ECF0F1;
+  // position: relative;
 }
 .info {
   margin: 5% 0 3% 0;

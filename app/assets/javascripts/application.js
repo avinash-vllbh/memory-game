@@ -48,7 +48,8 @@ $( document ).on('ready page:load', function() {
       // Get current element's attribute-id and show it's content
       // Add selected class to it
       var currentCardId = $(this).attr("id");
-      $(this).html(board[currentCardId].card).show(300).addClass("selected");
+      $(this).html("<span class = 'pos-center'>" + board[currentCardId].card + "</span>").addClass("selected");
+      $(this).find(".pos-center").fadeIn(500);
       if(prevCardId) {
         // Check if cards match
         if(board[currentCardId].card == board[prevCardId].card) {
@@ -60,7 +61,7 @@ $( document ).on('ready page:load', function() {
           setTimeout(function() {
             $(".cards#"+currentCardId).html("").removeClass("selected");
             $(".cards#"+prevCardId).html("").removeClass("selected");
-          }, 1000);
+          }, 1200);
           
         }
       }
