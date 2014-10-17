@@ -1,8 +1,12 @@
-# MEMORY GAME
+# Memory Game
 
-Simple web application for users to play memory game.
+Simple rails web application for users to play memory game.
 
-### D
+### Demo
+
+A demo of this can be seen at
+http://memorygame-demo.herokuapp.com
+
 
 ### Features
 
@@ -33,3 +37,12 @@ rake db:setup
 ```
 
 Add appropriate action mailer settings in respective [RAILS_ENV].rb files for the "notify user" functionality to work
+
+### Testing
+
+Rspec and Fixtures are used for unit testing. They are installed when bundler is run.
+
+You can run the test suite by running rspec from command line.
+```
+rspec
+```
