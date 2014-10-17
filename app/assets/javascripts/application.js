@@ -28,7 +28,8 @@ $( document ).on('ready page:load', function() {
   $(function(){
     if (typeof progress !== 'undefined' && progress.length > 0) {
       progress.forEach(function(id) {
-        $(".cards#"+id).html(board[id].card).addClass("flipped");
+        $(".cards#"+id).html("<span class = 'pos-center'>" + board[id].card + "</span>").addClass("flipped");
+        $(".cards#"+id).find(".pos-center").fadeIn(500);
       });
     }
   });

@@ -5,6 +5,10 @@ class GamesController < ApplicationController
     board_size = @game.board_size
     grid_size = Math.sqrt(@game.board_size)
     cards = Card.pluck(:content) # Return only content column of cards table.
+    # Handle the edge case if card table is not seeded
+    if cards.size < 2
+      cards = Card.default_cards
+    end
     # If board size is 16 (no of cards on board = 16) => Total pairs on board 8
     @game.total_pairs = board_size/2
     # Each element being added to the board should be added in pairs
