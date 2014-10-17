@@ -63,10 +63,10 @@ $( document ).on('ready page:load', function() {
         } else {
           setTimeout(function() {
             // Fade out the text inside the card and then remove the content
-            $(".cards#"+currentCardId).find(".pos-center").fadeOut(500, function(){
+            $(".cards#"+currentCardId).find(".pos-center").fadeOut(300, function(){
               $(".cards#"+currentCardId).html("").removeClass("selected");
             });
-            $(".cards#"+prevCardId).find(".pos-center").fadeOut(500, function(){
+            $(".cards#"+prevCardId).find(".pos-center").fadeOut(300, function(){
               $(".cards#"+prevCardId).html("").removeClass("selected");  
             });
           }, 1000);
