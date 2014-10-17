@@ -46,7 +46,10 @@ class GamesController < ApplicationController
   end
 
   def notify_user
-    UserMailer.notify_email(params[:email], params[:url]).deliver
-    render json: nil, status: 200
+    if UserMailer.notify_email(params[:email], params[:url]).deliver
+      render json: nil, status: 200
+    else
+      render json: nil, status: 422
+    end
   end
 end

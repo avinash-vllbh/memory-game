@@ -47,7 +47,13 @@ RSpec.describe GamesController, :type => :controller do
   end
 
   describe "#notify_user" do
-    post :notify_user, {:email => "test@test.com", :url => "memorygame-demo.herokuapp.com/games/a1243-123123-asd1233fasdef"}
-    expect(response).to respond_with 200
+    it "sends an email to emails address passed as parameter" do
+      post :notify_user, {:email => "test@test.com", :url => "http://memorygame-demo.herokuapp.com/games/a1243-123123-asd1233fasdef"}
+      expect(response).to have_http_status(:success)
+    end
+    it "returns 422 for invalid parameters" do
+      post :notify_user, {:email => "testtest.com", :url => "http://memorygame-demo.herokuapp.com/games/a1243-123123-asd1233fasdef"}
+      expect(response.status).to eq(422)
+    end
   end
 end
