@@ -1,28 +1,35 @@
-== README
+# MEMORY GAME
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple web application for users to play memory game.
 
-Things you may want to cover:
+### D
 
-* Ruby version
+### Features
 
-* System dependencies
+* Saves the state of users game, allowing them to come back to play over time.
+* Uses UUID to track each game's progress.
+* User's game progress is isolated to themselves, harder to guess other's game identifier.
+* Easier to generate reports on user progress.
+* Simple admin interface to set the cards content.
+* Email notifications
 
-* Configuration
+### Setup
 
-* Database creation
+Clone the repository
+```
+https://github.com/avinash-vllbh/memory-game.git
+```
+Run bundle install to setup all the gem's required for the repository
+```
+bundle install
+```
 
-* Database initialization
+Add the appropriate database configurations to app/config/database.yml file
+http://guides.rubyonrails.org/configuring.html#configuring-a-database
 
-* How to run the test suite
+Run db:setup, to setup the database along with schema and any seed provided in app/db/seed.rb
+```
+rake db:setup
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Add appropriate action mailer settings in respective [RAILS_ENV].rb files for the "notify user" functionality to work

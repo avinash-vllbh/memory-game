@@ -52,7 +52,7 @@ $( document ).on('ready page:load', function() {
       // Add selected class to it
       var currentCardId = $(this).attr("id");
       $(this).html("<span class = 'pos-center'>" + board[currentCardId].card + "</span>").addClass("selected");
-      $(this).find(".pos-center").fadeIn(500);
+      $(this).find(".pos-center").fadeIn(400);
       if(prevCardId) {
         // Check if cards match
         if(board[currentCardId].card == board[prevCardId].card) {
@@ -62,8 +62,13 @@ $( document ).on('ready page:load', function() {
           updateProgress(currentCardId, prevCardId);
         } else {
           setTimeout(function() {
-            $(".cards#"+currentCardId).html("").removeClass("selected");
-            $(".cards#"+prevCardId).html("").removeClass("selected");
+            // Fade out the text inside the card and then remove the content
+            $(".cards#"+currentCardId).find(".pos-center").fadeOut(500, function(){
+              $(".cards#"+currentCardId).html("").removeClass("selected");
+            });
+            $(".cards#"+prevCardId).find(".pos-center").fadeOut(500, function(){
+              $(".cards#"+prevCardId).html("").removeClass("selected");  
+            });
           }, 1000);
         }
       }

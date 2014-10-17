@@ -20,12 +20,12 @@
 <div class = "info row">
   <div class = "col-md-6">
     <p>
-      please use below link, if you want to continue your progress at a later time</br>
+      Use below link, if you want to continue with this game at a later time</br>
       <%= link_to "Continue Progress", { :controller => "games", :action => "show", :id => @game.id, :host => @hostname }, :class => "progressLink" %>
     </p>
   </div>
   <div class = "email-section col-md-6">
-    <p> Enter email id below to email the link your email address </p>
+    <p> Send this game's link to my email address </p>
     <%= form_tag '/notify_user', :class => "form", :id => "notify-form" do %>
       <div class="form-group" style = "width: 50%">
         <%= email_field_tag 'email', nil, placeholder: 'Enter email address...', :class => 'form-control', required: true %>
@@ -42,7 +42,7 @@
       <div class="modal-body">
         <div class="modal-body-center">
           <p>
-            <h4>Congrats!!! you won the game.</h4>
+            <h4>Congrats!!! You won the game.</h4>
           </p>
           </br>
           <%= link_to "New Game", root_path, :class => "btn btn-sm btn-success" %>

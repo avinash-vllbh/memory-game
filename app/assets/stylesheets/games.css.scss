@@ -18,18 +18,13 @@
   height: 70px;
   width: 70px;
   border: 1px solid #333;
+  color: #29323C;
   margin: 0 10px 10px 0;
   position: relative;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  // To wrap text inside div
-  white-space: pre-wrap;      /* CSS3 */   
-  white-space: -moz-pre-wrap; /* Firefox */    
-  white-space: -pre-wrap;     /* Opera <7 */   
-  white-space: -o-pre-wrap;   /* Opera 7 */    
-  word-wrap: break-word;      /* IE */
   .pos-center {
     display: none;
     @include center;
