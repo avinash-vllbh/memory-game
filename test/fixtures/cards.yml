@@ -1,0 +1,12 @@
+square:
+  id: 1
+  content: "square"
+triangle:
+  id: 2
+  content: "triangle"
+rhombus:
+  id: 3
+  content: "rhombus"
+pentagon:
+  id: 4
+  content: "pentagon"

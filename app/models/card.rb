@@ -3,7 +3,7 @@ class Card < ActiveRecord::Base
   has_many :boards
   has_many :games, through: :boards
 
-  SAMPLE_FOR_DIFFICULTY = { easy: 2, medium: 4, hard: 6, extra_hard: 8}
+  SAMPLE_FOR_DIFFICULTY = { easy: 2, medium: 4, hard: 6, extra_hard: 8 }
 
   validates :content, presence: true, uniqueness: true, length: { in: 4..10 }
 

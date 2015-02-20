@@ -1,0 +1,28 @@
+avi:
+  id: 1
+  email: "test@test.com"
+  encrypted_password: <%= Devise.bcrypt(User, 'avi12345') %>
+  sign_in_count: 1
+  current_sign_in_at: "2015-02-16 20:21:29.620841"
+  last_sign_in_at: "2015-02-16 20:21:29.620841"
+  current_sign_in_ip: "127.0.0.1"
+  last_sign_in_ip: "127.0.0.1"
+  created_at: "2015-02-15 20:21:29.606997"
+  updated_at: "2015-02-15 20:21:29.627238"
+  admin: FALSE
+  first_name: avinash
+  last_name: vallabhaneni
+admin:
+  id: 2
+  email: "admin@admin.com"
+  encrypted_password: <%= Devise.bcrypt(User, 'avi12345') %>
+  sign_in_count: 1
+  current_sign_in_at: "2015-02-16 20:21:29.620841"
+  last_sign_in_at: "2015-02-16 20:21:29.620841"
+  current_sign_in_ip: "127.0.0.1"
+  last_sign_in_ip: "127.0.0.1"
+  created_at: "2015-02-15 20:21:29.606997"
+  updated_at: "2015-02-15 20:21:29.627238"
+  admin: TRUE
+  first_name: avinash
+  last_name: vallabhaneni
