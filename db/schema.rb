@@ -11,11 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015223059) do
+ActiveRecord::Schema.define(version: 20150219153244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "boards", force: true do |t|
+    t.integer "game_id"
+    t.integer "card_id"
+    t.integer "position"
+    t.string  "state",    default: "origin", null: false
+  end
+
+  add_index "boards", ["game_id"], name: "index_boards_on_game_id", using: :btree
 
   create_table "cards", force: true do |t|
     t.string   "content",    null: false
@@ -25,13 +34,15 @@ ActiveRecord::Schema.define(version: 20141015223059) do
 
   add_index "cards", ["content"], name: "index_cards_on_content", unique: true, using: :btree
 
-  create_table "games", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
-    t.text     "board",                   null: false
-    t.integer  "total_pairs",             null: false
-    t.text     "flipped"
+  create_table "games", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "total_pairs"
     t.integer  "pairs_found", default: 0
+    t.string   "difficulty",  default: "easy"
+    t.string   "status",      default: "pending"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "grid_size",   default: 4
   end
 
   create_table "users", force: true do |t|
@@ -48,6 +59,8 @@ ActiveRecord::Schema.define(version: 20141015223059) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
