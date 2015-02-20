@@ -28,5 +28,10 @@ module MemoryGame
     # config.i18n.default_locale = :de
     # To load the fonts folder in vendor/assets
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
+
+    # Use Minitest for generating new tests.
+    config.generators do |g|
+      g.test_framework :minitest, spec: true, :fixture => true
+    end
   end
 end
