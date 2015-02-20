@@ -8,15 +8,43 @@
 </head>
 <body>
 <div class = "main-wrapper">
-  <header class="navbar" id="site-header" role="banner">
-    <div class="container">
+  <header id="site-header" role="banner">
+    <div class="container ">
       <div class="navbar-header">
-        <%= link_to root_path do %>
           <span class = "site-logo"><strong>Memory Game</strong></span>
-        <% end %>
       </div>
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <span class = "welcome-user"><%= "Hello, #{current_user.first_name}" %></span>
+          <span class = "logout"> <%= link_to "Logout", destroy_user_session_path, :method => :delete %></span>
+        <% else %>
+          <%= link_to "Login", new_user_session_path %>
+        <% end %>
+      </ul>
     </div>
+
+    <% if current_user %>
+      <nav role="navigation" class="navbar container">
+        
+        <!-- Collection of nav links and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav" id = "main-nav">
+                <li class="active"><a href="/home">Home</a></li>
+                <li><a href="/games">Games</a></li>
+                <% if current_user && current_user.admin %>
+                  <li><a href="/cards">Cards</a></li>
+                <% end %>
+            </ul>
+            
+        </div>
+      </nav>
+    <% end %>
+    <!-- </div> -->
   </header>
+
+  <!-- Main Navigation -->
+  
+
   <div class = "container" id = "wrapper">
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
