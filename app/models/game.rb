@@ -7,18 +7,15 @@ class Game < ActiveRecord::Base
   before_save :validate_pair_count
   after_create :prepare_game_board
 
-  # before_save :validate_pair_count
-
+  # validates :user_id, presence: true
+  # 
   def prepare_game_board
-    # validate_pair_count
     Board.prepare_board(self)
   end
 
-  ###
-  # Why join? Includes doesn't work! why?
+  # Gives you the board related to this game.
   def game_board
-    # Board.includes(:card).references(:card).where(game_id: self.id).select('boards.id, boards.game_id, boards.position, boards.card_id, cards.content')
-    Board.joins(:card).where(game_id: self.id).select('boards.id, boards.game_id, boards.position, boards.card_id, cards.content as card_content, boards.state').order("id ASC")
+    Board.game_board(self)
   end
 
   def validate_pair_count
@@ -26,10 +23,11 @@ class Game < ActiveRecord::Base
   end
 
   def update_preferences(params)
-    
     begin
       params["grid_size"] = params["grid_size"].to_i
-      
+
+      raise StandardError.new unless [2, 4, 6, 8].include?(params["grid_size"])
+
       update_board = 0
       update_board = 1 unless self.grid_size == params["grid_size"]
       update_board = 1 unless self.difficulty == params["difficulty"]
@@ -42,11 +40,9 @@ class Game < ActiveRecord::Base
         self.update!(params)
         Board.update_board(self)
       end
-
     rescue StandardError => e
       return false
     end
-
   end
 
 end

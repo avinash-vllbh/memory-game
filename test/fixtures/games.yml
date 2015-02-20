@@ -1,8 +1,16 @@
-game1:
+easy_game:
   id: 1
   user_id: 1
   total_pairs: 8
   pairs_found: 0
   difficulty: "easy"
-  status: pending
+  status: "pending"
+  grid_size: 4
+hard_game:
+  id: 2
+  user_id: 1
+  total_pairs: 8
+  pairs_found: 0
+  difficulty: "hard"
+  status: "pending"
   grid_size: 4

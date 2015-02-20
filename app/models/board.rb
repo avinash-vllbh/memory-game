@@ -2,14 +2,18 @@ class Board < ActiveRecord::Base
   belongs_to :game
   belongs_to :card
 
-  def self.prepare_board(game)
+  # Returns the board that belongs to the game
+  def self.game_board(game)
+    cols = "boards.id, boards.game_id, boards.position, boards.card_id, cards.content as card_content, boards.state"
+    joins(:card).where(game_id: game.id).select(cols).order("id ASC")
+  end
 
+  def self.prepare_board(game)
     game_cards = Card.cards_collection(game)
 
     game_cards.each_with_index do |card, index|
       Board.create!(game_id: game.id, card_id: card.id, position: index)
     end
-
   end
 
   def self.update_board(game)
@@ -38,8 +42,6 @@ class Board < ActiveRecord::Base
         selected_card.update!(state: "origin")
       end
     end
-
   end
-  
 end
 
