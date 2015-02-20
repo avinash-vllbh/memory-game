@@ -41,6 +41,10 @@ group :development do
 end
 
 group :development, :test do
+  gem 'minitest-rails'
+  gem 'minitest-rails-capybara'
+  gem 'minitest-reporters'
+  gem "mocha", :require => false
   gem 'rspec-rails'
   gem 'guard-rspec'
 end
@@ -54,3 +58,6 @@ gem 'rails_12factor', group: :production
 
 # Use unicorn as the app server
 gem 'unicorn'
+
+# New relic performance monitoring
+gem 'newrelic_rpm'

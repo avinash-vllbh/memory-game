@@ -22,13 +22,19 @@
 * Rails turbolinks - Makes any links on the page fire just page:load rather than ready.
 */
 $( document ).on('ready page:load', function() {
+
+  $("#main-nav a").click(function() {
+    $("#main-nav").find(".active").removeClass("active");
+    $(this).parent().addClass("active");
+  });
+  
   /* 
   * To flip the cards - when user comes back to his progress
   */
   $(function(){
     if (typeof progress !== 'undefined' && progress.length > 0) {
       progress.forEach(function(id) {
-        $(".cards#"+id).html("<span class = 'pos-center'>" + board[id].card + "</span>").addClass("flipped");
+        $(".cards#"+id).html("<span class = 'pos-center'>" + board[id].card + "</span>").addClass("matched");
         $(".cards#"+id).find(".pos-center").fadeIn(500);
       });
       checkIfGameCompleted();
@@ -40,39 +46,12 @@ $( document ).on('ready page:load', function() {
   * check if they are already selected or not and perform sequence of operatons.
   */
   $(".cards").click(function() {
-    // check if it's not already selected 
-    // check if it's not already flipped
-    // to make sure only two cards can have class selected to them
-    if(!$(this).hasClass("selected") && $(".cards.selected").length < 2 && !$(this).hasClass("flipped")) {
-      // Check if any other card has already been flipped
-      if($(".cards.selected").length) {
-        var prevCardId = $(".cards.selected").attr("id");
-      }
-      // Get current element's attribute-id and show it's content
-      // Add selected class to it
-      var currentCardId = $(this).attr("id");
-      $(this).html("<span class = 'pos-center'>" + board[currentCardId].card + "</span>").addClass("selected");
-      $(this).find(".pos-center").fadeIn(400);
-      if(prevCardId) {
-        // Check if cards match
-        if(board[currentCardId].card == board[prevCardId].card) {
-          // Remove selected class from the elements and add flipped class
-          $(".cards#"+currentCardId).removeClass("selected").addClass("flipped");
-          $(".cards#"+prevCardId).removeClass("selected").addClass("flipped");
-          updateProgress(currentCardId, prevCardId);
-        } else {
-          setTimeout(function() {
-            // Fade out the text inside the card and then remove the content
-            $(".cards#"+currentCardId).find(".pos-center").fadeOut(300, function(){
-              $(".cards#"+currentCardId).html("").removeClass("selected");
-            });
-            $(".cards#"+prevCardId).find(".pos-center").fadeOut(300, function(){
-              $(".cards#"+prevCardId).html("").removeClass("selected");  
-            });
-          }, 1000);
-        }
-      }
-    } 
+
+    if(!$(this).hasClass("selected") && $(".cards.selected").length < 2 && !$(this).hasClass("matched")) {
+      var currentCardId = $(this).data("card-id");
+      updateProgress(currentCardId);
+    }
+
   });
 });
 
@@ -81,26 +60,63 @@ $( document ).on('ready page:load', function() {
 * @param {Number} id1
 * @param {Number} id2
 */
-function updateProgress(id1, id2) {
-  progress.push(id1);
-  progress.push(id2);
-  // Make an ajax call to games#update
+function updateProgress(id) {
+
   $.ajax({
-    type: "PUT",
-    url: "/games/"+game_id,
+    type: "POST",
+    url: "/board/update_progress",
+    data: JSON.stringify({ id: id }),
+    contentType: "application/json; charset=utf-8",
     dataType: "json",
-    data: {progress: progress},
-    success: function(){
-      checkIfGameCompleted();
+    success: function(data){
+      updateGameBoard(data);
+    },
+    failure: function(errMsg) {
+        alert(errMsg);
     }
   });
 }
 
 /*
+* sets the cards state on the game board based on the response from the server
+*/
+function updateGameBoard(card) {
+
+  var difficulty = { "easy": 1500, "medium": 1000, "hard": 600, "extra_hard": 300 };
+
+  var item = $(".cards[data-card-id="+card.id+"]");
+  // Display content of the card
+  item.html("<span class = 'pos-center'>" + board[card.position].card_content + "</span>").addClass("selected");
+  item.find(".pos-center").fadeIn(400);
+
+  if(card.state == "origin") {
+    // Reset the cards!!!
+    setTimeout(function() {
+      // Fade out the text inside the card and then remove the content
+      $(".selected").each(function() {
+        $(this).removeClass("selected").find(".pos-center").fadeOut(300, function() {
+          $(this).html("");
+        }); 
+      });
+    }, difficulty[game.difficulty]);
+
+  } else if(card.state == "matched") {
+    // Remove the class selected and change their state to changed
+    $(".selected").each(function() {
+      $(this).removeClass("selected").addClass("matched").attr('data-card-state', 'matched');
+    });
+  } else {
+    // Do nothing
+  }
+  checkIfGameCompleted();
+}
+
+
+/*
 * Checks if game is completed and offer to start a new game
 */
 function checkIfGameCompleted() {
-  if (board.length == progress.length) {
+  if( $(".matched").length == game.total_pairs * 2 ) {
     $('#game-completed').modal('show')    
   }
 }
