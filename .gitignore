@@ -19,3 +19,4 @@ config/secrets.yml
 config/environments/production.rb
 config/environments/development.rb
 .env
+.*
