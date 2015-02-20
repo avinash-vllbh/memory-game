@@ -1,37 +1,44 @@
 <div class = "row">
   <div class = "col-md-7">
     <div class = "board">
-    <% @game.board.each do |card| %>
-      <div class = "cards col-md-1" id = "<%= card['id'] %>">
+    <% @game_board.each do |card| %>
+      <div class = "cards col-md-1 <%= card.state %> " data-card-id = "<%= card.id %>" data-card-position = "<%= card.position %>" data-card-state = "<%= card.state %>">
+      <% unless card.state == "origin" %>
+        <span class="pos-center" style="display: inline;"><%= card.card_content %></span>
+      <% end %>
       </div>
     <% end %>
     </div>
   </div>
   <div class = "col-md-5" style="line-height: 30px;">
-  <h4><span class="glyphicon glyphicon-bookmark"></span> Tips to play the game</h4><hr>
-  <p>
-    <span class="glyphicon glyphicon-hand-right"></span> Click on a card to reveal it's content</br>
-    <span class="glyphicon glyphicon-hand-right"></span> Two matching cards, stay flipped</br>
-    <span class="glyphicon glyphicon-hand-right"></span> The game is over when you have matched all pairs </br>
-    <span class="glyphicon glyphicon-hand-right"></span> Memorize the cards to find the pairs faster</br>
-  </p>
-  </div>
-</div>
-<div class = "info row">
-  <div class = "col-md-6">
-    <p>
-      Use below link, if you want to continue with this game at a later time</br>
-      <%= link_to "Continue Progress", { :controller => "games", :action => "show", :id => @game.id, :host => @hostname }, :class => "progressLink" %>
-    </p>
-  </div>
-  <div class = "email-section col-md-6">
-    <p> Send this game's link to my email address </p>
-    <%= form_tag '/notify_user', :class => "form", :id => "notify-form" do %>
-      <div class="form-group" style = "width: 50%">
-        <%= email_field_tag 'email', nil, placeholder: 'Enter email address...', :class => 'form-control', required: true %>
+    <h4> Update your game preferences </h4><br>
+    <%= form_for @game, html: { class: "form-horizontal" } do |f| %>
+      <div class = "form-group">
+        <%= f.label :grid_size, class: "col-sm-4 control-label" %>
+        <div class="col-sm-6">
+          <%= f.select :grid_size, (2..8).step(2).map { |n| ["   #{n} * #{n} ", n] }, {}, { class: "col-sm-4 form-control" } %>
+        </div>
       </div>
-      <%= submit_tag "Email Me", :class => 'btn btn-sm btn-danger' %>
+      <div class = "form-group">
+        <%= f.label :difficulty, 'Difficulty Level', class: "col-sm-4 control-label" %>
+        <div class="col-sm-6">
+          <%= f.select :difficulty, ["easy", "medium", "hard", ["extra hard", "extra_hard"]], {}, { class: "col-sm-4 form-control" }%>  
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-6">
+          <button type="submit" class="btn btn-primary">Update Preferences</button>
+        </div>
+      </div>
     <% end %>
+    <br><br>
+    <h4><span class="glyphicon glyphicon-bookmark"></span> Tips to play the game</h4><hr>
+    <p>
+      <span class="glyphicon glyphicon-hand-right"></span> Click on a card to reveal it's content</br>
+      <span class="glyphicon glyphicon-hand-right"></span> Two matching cards, stay flipped</br>
+      <span class="glyphicon glyphicon-hand-right"></span> The game is over when you have matched all pairs </br>
+      <span class="glyphicon glyphicon-hand-right"></span> Memorize the cards to find the pairs faster</br>
+    </p>
   </div>
 </div>
 
@@ -45,7 +52,7 @@
             <h4>Congrats!!! You won the game.</h4>
           </p>
           </br>
-          <%= link_to "New Game", root_path, :class => "btn btn-sm btn-success" %>
+          <%= link_to "Start New Game", new_game_path, class: "btn btn-primary" %>
         </div>
       </div>
       <div class="modal-footer">
@@ -56,16 +63,10 @@
 </div>
 
 <script type="text/javascript">
-  var game_id = "<%= @game.id %>"; 
   // Pass @game.board to javascript to display content when clicking on any div
-  var board = '<%= @game.board.to_json.html_safe %>';
-  // progress as array to store current flipped items
-  var progress = [];
-  // check if current progress is nil and elements if any are already filpped
-  <% unless @game.flipped.nil? %>
-    <% @game.flipped.each do |id| %>
-      progress.push("<%= id %>");
-    <% end %>
-  <% end %>  
+  var game = '<%= @game.to_json.html_safe %>';
+  var board = '<%= @game_board.to_json.html_safe %>';  
   board = JSON.parse(board);
+  game = JSON.parse(game);
+    
 </script>

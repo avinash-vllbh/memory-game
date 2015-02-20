@@ -1,1 +1,26 @@
-<%= render "game" %>
+<h2>Your Games</h2>
+<% unless @games.empty? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Total Pairs</th>
+        <th>Pairs Found</th>
+        <th>Progress</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td><%= link_to game.id, game_path(game.id) %></td>
+        <td><%= game.total_pairs %></td>
+        <td><%= game.pairs_found %></td>
+        <td><%= game.status %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p> You haven't played any games!!! </p>
+<% end %>
+<%= link_to "Start New Game", new_game_path, class: "btn btn-primary" %>
