@@ -33,9 +33,7 @@ class Game < ActiveRecord::Base
   def save_game_preferences
     self.pairs_found = 0
     self.status = "pending"
-    if self.save!
-      Board.update_board(self)
-    end
+    self.save! and Board.update_board(self)
   end
 
   def validate_preferences(params)
