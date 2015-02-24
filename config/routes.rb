@@ -12,15 +12,16 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :home
+  # resources :home
+  get '/home', to: 'home#index'
 
-  resources :games
-
-  post 'notify_user', to: 'games#notify_user'
+  resources :games, except: [:new, :destroy]
+  # post 'notify_user', to: 'games#notify_user'
   
   post '/board/update_progress', to: 'boards#update_progress'
-  # get '/board/update_progress/:id', to: 'boards#update_progress'
   
-  resources :cards
+  scope '/admin' do
+    resources :cards
+  end
   
 end

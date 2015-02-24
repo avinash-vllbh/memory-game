@@ -2,7 +2,7 @@ require 'test_helper'
 
 describe Game do
 
-  describe "new instance " do
+  describe "new instance" do
     before do 
       @game = Game.new
     end
@@ -26,11 +26,13 @@ describe Game do
       @game = Game.new
     end
 
+    # Doesn't test any behaviour
     it "should call prepare_board on Board" do
       Board.expects(:prepare_board).with(@game)
       @game.user = users(:avi)
       @game.save
     end
+
 
   end
 

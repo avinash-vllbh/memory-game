@@ -16,13 +16,13 @@
       <div class = "form-group">
         <%= f.label :grid_size, class: "col-sm-4 control-label" %>
         <div class="col-sm-6">
-          <%= f.select :grid_size, (2..8).step(2).map { |n| ["   #{n} * #{n} ", n] }, {}, { class: "col-sm-4 form-control" } %>
+          <%= f.select :grid_size, Game::GRID_SIZES.map { |n| ["   #{n} * #{n} ", n] }, {}, { class: "col-sm-4 form-control" } %>
         </div>
       </div>
       <div class = "form-group">
         <%= f.label :difficulty, 'Difficulty Level', class: "col-sm-4 control-label" %>
         <div class="col-sm-6">
-          <%= f.select :difficulty, ["easy", "medium", "hard", ["extra hard", "extra_hard"]], {}, { class: "col-sm-4 form-control" }%>  
+          <%= f.select :difficulty, Game::DIFFICULTY_LEVELS.map { |level| [level.humanize, level] }, {}, { class: "col-sm-4 form-control" }%>  
         </div>
       </div>
       <div class="form-group">
@@ -52,7 +52,7 @@
             <h4>Congrats!!! You won the game.</h4>
           </p>
           </br>
-          <%= link_to "Start New Game", new_game_path, class: "btn btn-primary" %>
+          <%= link_to "Start New Game", games_path, method: :post, class: "btn btn-primary" %>
         </div>
       </div>
       <div class="modal-footer">

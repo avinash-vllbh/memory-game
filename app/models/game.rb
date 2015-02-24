@@ -7,8 +7,9 @@ class Game < ActiveRecord::Base
   before_save :validate_pair_count
   after_create :prepare_game_board
 
-  # validates :user_id, presence: true
-  # 
+  GRID_SIZES = [2, 4, 6, 8]
+  DIFFICULTY_LEVELS = ["easy", "medium", "hard", "extra_hard"]
+
   def prepare_game_board
     Board.prepare_board(self)
   end
@@ -23,26 +24,22 @@ class Game < ActiveRecord::Base
   end
 
   def update_preferences(params)
-    begin
-      params["grid_size"] = params["grid_size"].to_i
+    return InvalidGameAttributes unless validate_preferences(params)
+    self.grid_size = params["grid_size"].to_i
+    self.difficulty = params["difficulty"]
+    save_game_preferences if self.changed?
+  end
 
-      raise StandardError.new unless [2, 4, 6, 8].include?(params["grid_size"])
-
-      update_board = 0
-      update_board = 1 unless self.grid_size == params["grid_size"]
-      update_board = 1 unless self.difficulty == params["difficulty"]
-
-      # Game preferences have been updated
-      # Update the board
-      if update_board
-        self.pairs_found = 0
-        self.status = "pending"
-        self.update!(params)
-        Board.update_board(self)
-      end
-    rescue StandardError => e
-      return false
+  def save_game_preferences
+    self.pairs_found = 0
+    self.status = "pending"
+    if self.save!
+      Board.update_board(self)
     end
+  end
+
+  def validate_preferences(params)
+    GRID_SIZES.include?(params["grid_size"].to_i) && DIFFICULTY_LEVELS.include?(params["difficulty"])
   end
 
 end

@@ -23,4 +23,4 @@
 <% else %>
   <p> You haven't played any games!!! </p>
 <% end %>
-<%= link_to "Start New Game", new_game_path, class: "btn btn-primary" %>
+<%= link_to "Start New Game", games_path, method: :post, class: "btn btn-primary" %>

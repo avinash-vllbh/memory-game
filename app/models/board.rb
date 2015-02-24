@@ -22,26 +22,37 @@ class Board < ActiveRecord::Base
     prepare_board(game)
   end
 
+  def update_cards_state_to_matched
+    self.update!(state: "matched")
+    @selected_card.update!(state: "matched")
+    update_game_status
+  end
+
+  def update_game_status
+    @game.pairs_found = @game.pairs_found + 1
+    @game.status = "completed" if @game.pairs_found == @game.total_pairs
+    @game.save!
+  end
+
+  def check_for_cards_content
+    if @selected_card.card.content == self.card.content
+      update_cards_state_to_matched
+    else
+      @selected_card.update!(state: "origin")
+    end
+  end
+
   def validate_board_state
     # There is only one card that could be in a selected state previously
-    selected_card = Board.includes(:card).where(game_id: self.game_id, state: "selected").first
-    
-    game = Game.find(self.game_id)
-    
-    if selected_card.nil?
+    @selected_card = Board.includes(:card).where(game_id: self.game_id, state: "selected").first
+    @game = Game.find(self.game_id)
+    if @selected_card.nil?
       self.state = "selected"
       self.save!
     else
-      if selected_card.card.content == self.card.content
-        self.update!(state: "matched")
-        selected_card.update!(state: "matched")
-        game.pairs_found = game.pairs_found + 1
-        game.status = "completed" if game.pairs_found == game.total_pairs
-        game.save!
-      else
-        selected_card.update!(state: "origin")
-      end
+      check_for_cards_content
     end
   end
+
 end
 
