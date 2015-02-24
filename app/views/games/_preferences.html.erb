@@ -1,0 +1,19 @@
+<%= form_for @game, html: { class: "form-horizontal" } do |f| %>
+  <div class = "form-group">
+    <%= f.label :grid_size, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.select :grid_size, Game::GRID_SIZES.map { |n| ["   #{n} * #{n} ", n] }, {}, { class: "col-sm-4 form-control" } %>
+    </div>
+  </div>
+  <div class = "form-group">
+    <%= f.label :difficulty, 'Difficulty Level', class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.select :difficulty, Game::DIFFICULTY_LEVELS.map { |level| [level.humanize, level] }, {}, { class: "col-sm-4 form-control" }%>  
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-6">
+      <button type="submit" class="btn btn-primary">Update Preferences</button>
+    </div>
+  </div>
+<% end %>
