@@ -27,6 +27,11 @@ $(document).on('ready page:load', function() {
     $("#main-nav").find(".active").removeClass("active");
     $(this).parent().addClass("active");
   });
+
+  $("#admin-nav").find("a").click(function() {
+    $("#main-nav").find("a.active").removeClass("active");
+    $(this).addClass("active");
+  });
   /*
    * To disable update preferences form when game is completed
    */

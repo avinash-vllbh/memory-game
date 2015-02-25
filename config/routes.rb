@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   get 'games/counters/:id', to: 'games#counters'
   
   post '/board/update_progress', to: 'boards#update_progress'
+
+  namespace :admin do
+    resources :users, only: [:index, :destroy]
+  end
   
   scope '/admin' do
     resources :cards

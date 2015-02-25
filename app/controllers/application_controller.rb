@@ -23,5 +23,4 @@ class ApplicationController < ActionController::Base
       redirect_to home_index_path, :flash => { :alert => "You are not allowed to do that!!!" }
     end
   end
-
 end

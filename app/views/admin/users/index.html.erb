@@ -1,0 +1,30 @@
+<h1>List of Users</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Games Played</th>
+      <th>Number of Guesses</th>
+      <th>Number of Matches</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= "#{user.first_name} #{user.last_name}" %></td>
+      <td><%= user.email %></td>
+      <td><%= user.games.count %></td>
+      <td><%= user.guesses %></td>
+      <td><%= user.matches %></td>
+      <td>
+        <% if user == current_user %>
+          <%= link_to "Edit Account", edit_user_registration_path(user), :class => "btn btn-sm btn-primary" %>
+        <% end %>
+        <%= link_to "Delete User", admin_user_path(user), method: :delete, :class => "btn btn-sm btn-danger", :confirm => "Are you sure?" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
