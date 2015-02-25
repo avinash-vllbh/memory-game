@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get '/home', to: 'home#index'
 
   resources :games, except: [:new, :destroy]
-  # post 'notify_user', to: 'games#notify_user'
+  get 'games/counters/:id', to: 'games#counters'
   
   post '/board/update_progress', to: 'boards#update_progress'
   

@@ -27,6 +27,16 @@ $(document).on('ready page:load', function() {
     $("#main-nav").find(".active").removeClass("active");
     $(this).parent().addClass("active");
   });
+  /*
+   * To disable update preferences form when game is completed
+   */
+  $(function() {
+    if (game.status == "completed") {
+      var form_elements = $("#game-preferences").find("select");
+      form_elements.prop("disabled", true);
+      $("#game-preferences").find("button").prop("disabled", true);
+    }
+  });
 
   /* 
    * To flip the cards - when user comes back to his progress
@@ -118,12 +128,39 @@ function updateGameBoard(card) {
   checkIfGameCompleted();
 }
 
+function updateGameBoardCounters(data) {
+  game = data;
+  $("#guess-stat-content").html(game.guesses);
+  $("#match-stat-content").html(game.pairs_found);
+  $("#accuracy-stat-content").html(game.accuracy);
+}
+/*
+* Retrive game counters and update on DOM
+ */
+function getGameCounters() {
+  $.ajax({
+    type: "GET",
+    url: "/games/counters/"+game.id,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(data) {
+      updateGameBoardCounters(data);
+    },
+    failure: function(errMsg) {
+      alert(errMsg);
+    }
+  });
+}
 
 /*
  * Checks if game is completed and offer to start a new game
  */
 function checkIfGameCompleted() {
-  if ($(".matched").length == game.total_pairs * 2) {
-    $('#game-completed').modal('show')
+  getGameCounters();
+  if ( $(".matched").length == game.total_pairs * 2 ) {
+    $('#game-completed').modal('show');
+    var form_elements = $("#game-preferences").find("select");
+    form_elements.prop("disabled", true);
+    $("#game-preferences").find("button").prop("disabled", true);
   }
 }

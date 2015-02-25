@@ -11,9 +11,19 @@
     </div>
   </div>
   <div class = "col-md-5" style="line-height: 30px;">
-    <h4> Update your game preferences </h4><br>
-    <%= render "preferences" %>
-    <br><br>
+    <div id="game-stats">
+      <h4> Game Statistics </h4>
+      <hr>
+      <div id="guess-stat"> Number of Guesses: <span id="guess-stat-content"><%= @game.guesses %> </span></div>
+      <div id="match-stat"> Number of Matches: <span id="match-stat-content"><%= @game.pairs_found %> </span></div>
+      <div id="accuracy-stat"> Accuracy Percentage: <span id="accuracy-stat-content"><%= @game.accuracy %></span>%</div>
+      <br>
+    </div>
+    <div id="game-prefs">
+      <h4> Update your game preferences </h4><hr>
+      <%= render "preferences" %>
+      <br><br>
+    </div>
     <h4><span class="glyphicon glyphicon-bookmark"></span> Tips to play the game</h4><hr>
     <p>
       <span class="glyphicon glyphicon-hand-right"></span> Click on a card to reveal it's content</br>

@@ -35,6 +35,14 @@
           <td>Email</td>
           <td><%= @user.email %></td>
         </tr>
+        <tr>
+          <td>Number of guesses</td>
+          <td><%= @user.guesses %></td>
+        </tr>
+        <tr>
+          <td>Number of matches</td>
+          <td><%= @user.matches %></td>
+        </tr>
       </tbody>
     </table>
     <%= link_to "Update Account", edit_user_registration_path(@user), class: "btn btn-success" %>

@@ -4,10 +4,6 @@ class GamesController < ApplicationController
     @games = current_user.games
   end
 
-  # No need for user input in creating a new game.
-  # def new
-  # end
-
   def create
     @game = Game.create
     @game.user_id = current_user.id
@@ -28,12 +24,24 @@ class GamesController < ApplicationController
   # Update game preferences
   def update
     @game = Game.find(params[:id])
-    if @game.update_preferences(game_params)
+    @game.update_preferences(game_params)
+    if @game.errors.empty?
       flash[:notice] = "Your game preferences have been successfully updated!"
     else
-      flash[:alert] = "Your game preferences have not been updated!"
+      flash[:alert] = @game.errors[:base].to_sentence
     end
     redirect_to @game
+  end
+
+  ###
+  # Respond with game as only json
+  def counters
+    @game = Game.find(params[:id])
+    unless @game.user == current_user
+      render json: nil, status: 422
+    else
+      render json: @game, status: 200
+    end
   end
 
   # def notify_user
